@@ -318,6 +318,13 @@ class WorkbooksStream(TableauStream):
         th.Property("show_tabs", th.BooleanType),
         th.Property("size", th.NumberType),
         th.Property("tags", th.ArrayType(th.StringType)),
+        th.Property("views", th.ArrayType(
+            th.ObjectType(
+                th.Property("id", th.StringType),
+                th.Property("name", th.StringType),
+                th.Property("total_views", th.NumberType)
+            )
+        )),
         th.Property("updated_at", th.DateTimeType),
         th.Property("webpage_url", th.StringType),
     ).to_dict()
@@ -328,7 +335,7 @@ class WorkbooksStream(TableauStream):
         for workbook in TSC.Pager(self.server_client.workbooks):
             self.server_client.workbooks.populate_connections(workbook)
             self.server_client.workbooks.populate_permissions(workbook)
-            self.server_client.workbooks.populate_views(workbook)
+            self.server_client.workbooks.populate_views(workbook, usage=True)
             try:
                 permissions = [get_permission_details(permission) for permission in workbook.permissions]
             except ServerResponseError:
@@ -347,6 +354,7 @@ class WorkbooksStream(TableauStream):
                 'show_tabs': workbook.show_tabs,
                 'size': workbook.size,
                 'tags': list(workbook.tags),
+                'views': [{'id': view.id, 'name': view.name, 'total_views': view.total_views} for view in workbook.views],
                 'updated_at': format_datetime(workbook.updated_at),
                 'webpage_url': workbook.webpage_url
             }
