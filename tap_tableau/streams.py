@@ -286,7 +286,7 @@ class TasksStream(TableauStream):
 
 class UsersStream(TableauStream):
     name = "users"
-    primary_keys = ["name"]
+    primary_keys = ["id"]
     replication_key = None
     schema = th.PropertiesList(
         th.Property("auth_setting", th.StringType),
