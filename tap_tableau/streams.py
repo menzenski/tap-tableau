@@ -284,6 +284,38 @@ class TasksStream(TableauStream):
             }
             yield row
 
+class UsersStream(TableauStream):
+    name = "users"
+    primary_keys = ["id"]
+    replication_key = None
+    schema = th.PropertiesList(
+        th.Property("auth_setting", th.StringType),
+        th.Property("domain_name", th.StringType),
+        th.Property("external_auth_user_id", th.StringType),
+        th.Property("id", th.StringType),
+        th.Property("last_login", th.DateTimeType),
+        th.Property("email", th.StringType),
+        th.Property("fullname", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("site_role", th.StringType),
+    ).to_dict()
+
+    def get_records(self, context: Optional[dict]) -> Iterable[dict]:
+        """Return a generator of row-type dictionary objects.
+        """
+        for user in TSC.Pager(self.server_client.users):
+            row = {
+                'auth_setting': user.auth_setting,
+                'domain_name': user.domain_name,
+                'external_auth_user_id': user.external_auth_user_id,
+                'id': user.id,
+                'last_login': user.last_login,
+                'email': user.email,
+                'fullname': user.fullname,
+                'name': user.name,
+                'site_role': user.site_role,
+            }
+            yield row
 
 class WorkbooksStream(TableauStream):
     name = "workbooks"
