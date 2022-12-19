@@ -293,7 +293,7 @@ class UsersStream(TableauStream):
         th.Property("domain_name", th.StringType),
         th.Property("external_auth_user_id", th.StringType),
         th.Property("id", th.StringType),
-        th.Property("last_login", th.StringType),
+        th.Property("last_login", th.DateTimeType),
         th.Property("email", th.StringType),
         th.Property("fullname", th.StringType),
         th.Property("name", th.StringType),
