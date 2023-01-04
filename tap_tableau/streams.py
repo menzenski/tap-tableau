@@ -386,7 +386,13 @@ class WorkbooksStream(TableauStream):
                 'show_tabs': workbook.show_tabs,
                 'size': workbook.size,
                 'tags': list(workbook.tags),
-                'views': [{'id': view.id, 'name': view.name, 'total_views': view.total_views} for view in workbook.views],
+                'views': [{
+                    'id': view.id,
+                    'name': view.name,
+                    'total_views': view.total_views,
+                    'content_url': view.content_url,
+                    'owner_id': view.owner_id
+                } for view in workbook.views],
                 'updated_at': format_datetime(workbook.updated_at),
                 'webpage_url': workbook.webpage_url
             }
