@@ -12,7 +12,8 @@ license = "Apache 2.0"
 [tool.poetry.dependencies]
 python = "<3.12,>=3.7.1"
 requests = "^2.25.1"
-singer-sdk = "^0.19.0"
+singer-sdk = { git = "https://github.com/meltano/sdk.git", rev = "842684615d6d5e31394d804264f95fc19f51e4d5" }
+# singer-sdk = "^0.19.0"
 tableauserverclient = "^0.18.0"
 atomicwrites = "^1.4.0"
 zipp = "^3.8.0"
