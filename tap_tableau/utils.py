@@ -23,4 +23,5 @@ def get_user_details(user):
         'name': user.name,
         'full_name': user.fullname,
         'role': user.site_role,
+        'last_login_at': user.last_login,
     }

@@ -120,6 +120,7 @@ class GroupsStream(TableauStream):
                 th.Property("name", th.StringType),
                 th.Property("full_name", th.StringType),
                 th.Property("role", th.StringType),
+                th.Property("last_login_at", th.DateTimeType),
             )
         )),
     ).to_dict()
