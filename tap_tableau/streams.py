@@ -582,19 +582,17 @@ class EmbeddedDatasourcesMetadataStream(TableauMetadataStream):
         th.Property("hasExtracts", th.BooleanType),
         th.Property("extractLastRefreshTime", th.DateTimeType),
         th.Property("extractLastUpdateTime", th.DateTimeType),
-        th.Property("workbook", th.ArrayType(
-            th.ObjectType(
-                th.Property("id", th.StringType),
-                th.Property("luid", th.StringType),
-                th.Property("name", th.StringType),
-                th.Property("projectName", th.StringType),
-                th.Property("owner", th.ArrayType(
-                    th.ObjectType(
-                        th.Property("name", th.StringType),
-                        th.Property("username", th.StringType)
-                    )
-                ))
-            )
+        th.Property("workbook", th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("luid", th.StringType),
+            th.Property("name", th.StringType),
+            th.Property("projectName", th.StringType),
+            th.Property("owner", th.ArrayType(
+                th.ObjectType(
+                    th.Property("name", th.StringType),
+                    th.Property("username", th.StringType)
+                )
+            ))
         ))
     ).to_dict()
     primary_keys = ["id"]
