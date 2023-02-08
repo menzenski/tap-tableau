@@ -822,3 +822,89 @@ class CalculatedFieldsMetadataStream(TableauMetadataStream):
         resp_json = response.json()
         for row in resp_json["data"]["calculatedFields"]:
             yield row
+
+
+class ColumnLineageMetadataStream(TableauMetadataStream):
+    name = "column_lineage_metadata"
+    schema = th.PropertiesList(
+        th.Property("name", th.StringType),
+        th.Property("id", th.StringType),
+        th.Property("luid", th.StringType),
+        th.Property("projectName", th.StringType),
+        th.Property("embeddedDatasources", th.ArrayType(
+            th.ObjectType(
+                th.Property("name", th.StringType),
+                th.Property("id", th.StringType)
+            )
+        )),
+        th.Property("upstreamTables", th.ArrayType(
+            th.ObjectType(
+                th.Property("name", th.StringType),
+                th.Property("id", th.StringType),
+                th.Property("luid", th.StringType)
+            )
+        )),
+        th.Property("sheets", th.ArrayType(
+            th.ObjectType(
+                th.Property("name", th.StringType),
+                th.Property("id", th.StringType),
+                th.Property("luid", th.StringType),
+                th.Property("sheetFieldInstances", th.ArrayType(
+                    th.ObjectType(
+                        th.Property("name", th.StringType),
+                        th.Property("id", th.StringType),
+                        th.Property("upstreamFields", th.ArrayType(
+                            th.ObjectType(
+                                th.Property("name", th.StringType),
+                                th.Property("id", th.StringType)
+                            )
+                        )),
+                    )
+                )),
+            )
+        ))
+    ).to_dict()
+    primary_keys = ["id"]
+    replication_key = None
+
+    @property
+    def query(self) -> str:
+        return """
+            query columnLineage {
+                workbooksConnection {
+                    nodes{
+                      name
+                      id
+                      luid
+                      projectName
+                      embeddedDatasources {
+                        name
+                        id
+                      }
+                      upstreamTables {
+                        name
+                        id
+                        luid
+                      }
+                      sheets {
+                        name
+                        id
+                        luid
+                        sheetFieldInstances {
+                          name
+                          id
+                          upstreamFields {
+                            name
+                            id
+                          }
+                        }
+                      }
+                    }
+                }
+            }
+        """
+
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        resp_json = response.json()
+        for row in resp_json["data"]["workbooksConnection"]:
+            yield row
