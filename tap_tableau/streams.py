@@ -902,5 +902,5 @@ class ColumnLineageMetadataStream(TableauMetadataStream):
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
         resp_json = response.json()
-        for row in resp_json["data"]["workbooksConnection"]:
+        for row in resp_json["data"]["workbooksConnection"]["nodes"]:
             yield row
