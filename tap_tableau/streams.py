@@ -587,11 +587,9 @@ class EmbeddedDatasourcesMetadataStream(TableauMetadataStream):
             th.Property("luid", th.StringType),
             th.Property("name", th.StringType),
             th.Property("projectName", th.StringType),
-            th.Property("owner", th.ArrayType(
-                th.ObjectType(
-                    th.Property("name", th.StringType),
-                    th.Property("username", th.StringType)
-                )
+            th.Property("owner", th.ObjectType(
+                th.Property("name", th.StringType),
+                th.Property("username", th.StringType)
             ))
         ))
     ).to_dict()
