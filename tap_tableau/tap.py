@@ -37,6 +37,7 @@ METADATA_STREAM_TYPES = [
     EmbeddedDatasourcesMetadataStream,
     UsersMetadataStream,
     WorkbooksMetadataStream,
+    ColumnLineageMetadataStream,
 ]
 
 
