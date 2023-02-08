@@ -20,6 +20,7 @@ from tap_tableau.streams import (
     UsersMetadataStream,
     WorkbooksMetadataStream,
     CalculatedFieldsMetadataStream,
+    ColumnLineageMetadataStream,
 )
 STREAM_TYPES = [
     DatasourcesStream,
@@ -37,6 +38,7 @@ METADATA_STREAM_TYPES = [
     EmbeddedDatasourcesMetadataStream,
     UsersMetadataStream,
     WorkbooksMetadataStream,
+    ColumnLineageMetadataStream,
 ]
 
 
