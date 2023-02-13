@@ -1,4 +1,4 @@
-from singer_sdk._singerlib.util import strftime
+from singer_sdk._singerlib.utils import strftime
 
 
 def format_datetime(dt):
