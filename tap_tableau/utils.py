@@ -1,9 +1,9 @@
-import singer
+from singer_sdk._singerlib.utils import strftime
 
 
 def format_datetime(dt):
     if dt is not None:
-        return singer.utils.strftime(dt)
+        return strftime(dt)
     return None
 
 

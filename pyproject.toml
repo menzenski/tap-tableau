@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tap-tableau"
-version = "0.0.1"
+version = "0.1.0"
 description = "`tap-tableau` is a Singer tap for Tableau, built with the Meltano SDK for Singer Taps."
 authors = ["Gary James"]
 keywords = [
@@ -10,9 +10,9 @@ keywords = [
 license = "Apache 2.0"
 
 [tool.poetry.dependencies]
-python = "<3.11,>=3.7.1"
+python = "<3.12,>=3.7.1"
 requests = "^2.25.1"
-singer-sdk = "^0.4.5"
+singer-sdk = "^0.20.0"
 tableauserverclient = "^0.18.0"
 atomicwrites = "^1.4.0"
 zipp = "^3.8.0"
